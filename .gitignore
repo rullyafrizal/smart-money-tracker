@@ -1,0 +1,42 @@
+# --- Environments & Secrets ---
+.venv/
+env/
+venv/
+.env
+.env.*
+!.env.example
+
+# --- Byte-code & Caching ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Database & Local Storage ---
+*.db
+*.sqlite
+*.sqlite3
+tracker.db
+
+# --- Generated Export Files & Artifacts ---
+*.xlsx
+*.csv
+laporan_*.xlsx
+
+# --- Operating System & IDEs ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Packaging & Distribution ---
+dist/
+build/
+*.egg-info/
