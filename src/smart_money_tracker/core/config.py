@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 
@@ -9,6 +11,7 @@ class Settings(BaseSettings):
     model_name: str = Field(default="google_genai:gemini-3.1-flash-lite", alias="MODEL_NAME")
     default_currency: str = Field(default="IDR", alias="DEFAULT_CURRENCY")
     database_url: str = Field(default="sqlite:///./tracker.db", alias="DATABASE_URL")
+    telegram_bot_token: Optional[str] = Field(default=None, alias="TELEGRAM_BOT_TOKEN")
 
     model_config = SettingsConfigDict(
         env_file=".env", 

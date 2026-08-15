@@ -37,6 +37,16 @@ class ExpenseRepository:
             sess.commit()
         return saved_ids
 
+    def delete_transaction(self, trx_id: str, user_id: str) -> bool:
+        """Hapus transaksi berdasarkan ID."""
+        with self.SessionLocal() as sess:
+            record = sess.get(ExpenseRecord, trx_id)
+            if not record or record.user_id != user_id:
+                return False
+            sess.delete(record)
+            sess.commit()
+            return True
+
     def get_all_by_user(self, user_id: str) -> list[ExpenseRecord]:
         """Retrieve all expenses for a specific user."""
         with self.SessionLocal() as sess:

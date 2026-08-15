@@ -27,12 +27,18 @@ class TrackerState(TypedDict):
     warning_message: Optional[str]
 
 def parse_node(state: TrackerState) -> dict:
-    conversation_history = "\n".join(
-        f"{msg.type}: {msg.content}" for msg in state["messages"]
-    )
-    ref_date = state.get("ref_date")
+    latest_msg = state["messages"][-1]
 
-    result = extract_expenses(raw_text=conversation_history, ref_date=ref_date)
+    if isinstance(latest_msg.content, list):
+        input_payload = latest_msg.content
+    else:
+        input_payload = "\n".join(
+            f"{msg.type}: {msg.content}" 
+            for msg in state["messages"] 
+            if isinstance(msg.content, str)
+        )
+    ref_date = state.get("ref_date")
+    result = extract_expenses(input_content=input_payload, ref_date=ref_date)
     return {"extraction_result": result}
 
 def confirmation_node(state: TrackerState) -> dict:
